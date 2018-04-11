@@ -1,0 +1,14 @@
+import React, { Component } from 'react';
+
+import './Home.scss';
+
+export default class Home extends Component{
+  render(){
+    return(
+      <div className="home">
+        <h1>Home</h1>
+        <img src={require('../../assets/img/img.jpg')} alt="" width="200" />
+      </div>
+    )
+  }
+}
