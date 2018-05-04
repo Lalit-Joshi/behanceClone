@@ -6,7 +6,8 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = {
  entry: {
-   app: './src/index.js'
+     vendor: './src/vendor.js',
+     app: './src/index.js'
  },
  module : {
    rules: [
@@ -15,7 +16,7 @@ module.exports = {
        use: 'babel-loader'
      },
      {
-        test: /\.scss$/,
+        test: /\.(scss|css)$/,
         use: ['css-hot-loader'].concat(ExtractTextPlugin.extract({
             fallback: 'style-loader',
             use: [{loader: 'css-loader', options: { minimize: true }}, 'sass-loader']
@@ -25,16 +26,19 @@ module.exports = {
        test: /\.(png|jpg|gif|svg)$/,
        use: [
           {
-            loader: 'file-loader',
-            options: {
-              publicPath: 'static/asstes/img',
-              outputPath: 'static/asstes/img'
-            }
+            loader: 'file-loader?name=static/img/[hash].[ext]',
           }
         ]
        }
    ]
  },
+optimization: {
+    splitChunks: {
+        cacheGroups: {
+            commons: { test: /[\\/]node_modules[\\/]/, name: "vendor", chunks: "all"}
+        }
+    }
+},
  plugins: [
    new webpack.NamedModulesPlugin(),
    new webpack.HotModuleReplacementPlugin(),
@@ -42,9 +46,14 @@ module.exports = {
      template: './public/index.html'
    }),
    new ExtractTextPlugin({
-       filename: `static/css/app.bundle.css`,
+       filename: `static/css/[name].bundle.css`,
        disable: false,
        allChunks: true
+   }),
+   new webpack.ProvidePlugin({
+       $: 'jquery',
+       jQuery: 'jquery',
+       'window.jQuery': 'jquery'
    })
  ],
  output: {
