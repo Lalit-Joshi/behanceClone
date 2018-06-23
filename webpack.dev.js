@@ -9,6 +9,13 @@ module.exports = merge(common, {
     contentBase: './public',
     historyApiFallback: true,
     hot: true,
+    proxy: {
+          '/api/*': {
+              target: 'https://api.behance.net/v2/projects?',
+              secure: false,
+              changeOrigin: true
+          }
+      },
     port: 3005
   }
 });

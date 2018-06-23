@@ -1,0 +1,96 @@
+@import '../../../styles/global.scss';
+@import '../../../styles/mixins.scss';
+
+.card{
+  background: #fff;
+  @include box-shadow(0, 1px, 2px, rgba(25,25,25,0.2));
+  margin-bottom: 30px;
+  @include border-radius(3px);
+  border: none;
+
+  img{
+    width: 100%;
+    height: auto;
+    margin-bottom: 8px;
+    @include border-radius(3px 3px 0px 0px);
+  }
+  .inner{
+    padding: 0 7px;
+    padding-bottom: 10px;
+    h2{
+      font:{
+        family: $primary-font;
+        size: 13px;
+        weight: 600;
+      }
+      color: $primary-color;
+      height: 36px;
+      overflow: hidden;
+      margin-bottom: 10px;
+    }
+    span{
+      font:{
+        family: $primary-font;
+        size: 13px;
+      }
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: block;
+      &.ownername{
+        position: relative;
+        margin-bottom: 8px;
+        height: 27px;
+        &:after{
+          background-color: #ccc;
+          bottom: 0px;
+          content: '';
+          display: block;
+          height: 1px;
+          left: 0px;
+          position: absolute;
+          width: 10px;
+        }
+      }
+    }
+    .status{
+      margin-top: 8px;
+      border-top: 1px #f2f2f2 solid;
+      padding: 8px 0 0 0;
+      float: left;
+      width: 100%;
+      font:{
+        size: 12px;
+      }
+      ul{
+        @include uldefault;
+        li{
+          margin-right: 10px;
+          float: left;
+          &:last-child{
+            margin-right: 0px;
+          }
+          .svgicon{
+            float: left;
+            svg{
+              path{
+                &.fill{
+                  fill: #a4a4a4;
+                }
+              }
+            }
+          }
+          .text{
+            font:{
+              size: 12px;
+              weight: 700;
+            }
+            float: left;
+            margin-left: 4px;
+            margin-top: 1px;
+          }
+        }
+      }
+    }
+  }
+}
